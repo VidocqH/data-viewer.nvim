@@ -1,4 +1,3 @@
-local utils = require('data-viewer.utils')
 
 ---@param line string
 ---@return string[]
@@ -27,7 +26,7 @@ end
 ---@return string[]
 local function getHeaders(headerStr)
   ---@type string[]
-  return utils.split_string(headerStr, ",")
+  return parseLine(headerStr)
 end
 
 
@@ -39,7 +38,6 @@ local function getBody(csvLines, headers)
   local body = {}
   for _, line in ipairs(csvLines) do
     local words = parseLine(line)
-    -- local words = utils.split_string(line, ",")
     local lineObj = {}
     for idx, cell in ipairs(words) do
       lineObj[headers[idx]] = cell

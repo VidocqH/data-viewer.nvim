@@ -3,18 +3,6 @@ local plenaryStrings = require('plenary.strings')
 ---@class Utils
 local M = {}
 
----@param inputStr string
----@param delimiter string
----@return string[]
-M.split_string = function (inputStr, delimiter)
-  local strings = {}
-  for str in inputStr:gmatch("(.-)" .. delimiter) do
-    table.insert(strings, str)
-  end
-  table.insert(strings, inputStr:match(".+" .. delimiter .. "(.*)$"))
-  return strings
-end
-
 ---@param array1 any[]
 ---@param array2 any[]
 ---@return any[]
