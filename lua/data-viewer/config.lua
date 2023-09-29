@@ -11,6 +11,7 @@ local viewConfig = {
 ---@class Config
 ---@field view ViewConfig
 local config = {
+  columnColorEnable = true,
   columnColorRoulette = {"DataViewerColumn0", "DataViewerColumn1", "DataViewerColumn2"},
   view = viewConfig,
 }

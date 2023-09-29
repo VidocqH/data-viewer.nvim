@@ -25,8 +25,10 @@ M.start = function()
   local colMaxWidth = module.get_max_width(parsedData.headers, parsedData.bodyLines)
   local formatedLines = module.format_lines(parsedData.headers, parsedData.bodyLines, colMaxWidth)
   module.open_win(formatedLines)
-  module.highlight_header(parsedData.headers, colMaxWidth)
-  module.highlight_rows(parsedData.headers, parsedData.bodyLines, colMaxWidth)
+  if (config.config.columnColorEnable) then
+    module.highlight_header(parsedData.headers, colMaxWidth)
+    module.highlight_rows(parsedData.headers, parsedData.bodyLines, colMaxWidth)
+  end
 end
 
 return M
