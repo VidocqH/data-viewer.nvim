@@ -1,6 +1,7 @@
 local utils = require('data-viewer.utils')
 local configClass = require('data-viewer.config')
 local config = configClass.config
+local parsers = require('data-viewer.parser.parsers')
 
 ---@class CustomModule
 local M = {}
@@ -9,11 +10,12 @@ local M = {}
 ---@return string | "'csv'" | "'unsupport'"
 M.is_support_filetype = function (cur_buffer)
   local ft = vim.api.nvim_buf_get_option(cur_buffer, "filetype")
-  if ft == "csv" or ft == 'tsv' then
-    return ft
-  else
-    return 'unsupport'
+  for parserName, _ in pairs(parsers) do
+    if parserName == ft then
+      return ft
+    end
   end
+  return 'unsupport'
 end
 
 ---@param cur_buffer number
