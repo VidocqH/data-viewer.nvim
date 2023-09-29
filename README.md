@@ -1,8 +1,12 @@
 # DataViewer.nvim
 
-Table views for data files such as 'csv'
+Table views for data files such as `csv`, `tsv`
 
 <img width="1352" alt="image" src="https://github.com/VidocqH/data-viewer.nvim/assets/16725418/7b933b3a-fd4e-4758-9917-9055c35796db">
+
+### Supported filetypes
+- csv
+- tsv
 
 ## Requirements
 - neovim >= 0.8
