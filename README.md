@@ -1,8 +1,19 @@
 # DataViewer.nvim
 
-Table views for data files such 'csv'
+Table views for data files such as 'csv'
+
+<img width="1352" alt="image" src="https://github.com/VidocqH/data-viewer.nvim/assets/16725418/234735a1-5a80-45fd-8e1b-3336b6ae16e7">
+
+## Requirements
+- neovim >= 0.8
+- [plenary](https://github.com/nvim-lua/plenary.nvim)
 
 ## Usage
+
+### Commands
+- `:DataViewer`
+
+## Installation
 
 ### Lazy:
 
@@ -27,3 +38,7 @@ local config = {
   }
 }
 ```
+
+## TODO
+- More filetypes support
+- Highlight group
