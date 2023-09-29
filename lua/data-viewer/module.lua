@@ -82,16 +82,15 @@ end
 
 ---@param header string[]
 ---@param lines table<string, string>[]
-M.format_lines = function (header, lines)
-  local colMaxWidth = M.get_max_width(header, lines)
+---@param colMaxWidth table<string, number>
+M.format_lines = function (header, lines, colMaxWidth)
   local formatedHeader = M.format_header(header, colMaxWidth)
   local formatedBody = M.format_body(lines, header, colMaxWidth)
   return utils.merge_array(formatedHeader, formatedBody)
 end
 
 ---@param lines string[]
----@param viewConfig table<string, any>
-M.open_win = function (lines, viewConfig)
+M.open_win = function (lines)
   local buf = vim.api.nvim_create_buf(false, true)
 
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)

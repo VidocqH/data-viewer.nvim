@@ -22,8 +22,9 @@ M.start = function()
 
   local lines = module.read_file(cur_buffer)
   local parsedData = parsers[ft](lines)
-  local formatedLines = module.format_lines(parsedData.headers, parsedData.bodyLines)
-  module.open_win(formatedLines, M.config.view)
+  local colMaxWidth = module.get_max_width(parsedData.headers, parsedData.bodyLines)
+  local formatedLines = module.format_lines(parsedData.headers, parsedData.bodyLines, colMaxWidth)
+  module.open_win(formatedLines)
 end
 
 return M
