@@ -9,7 +9,7 @@ local M = {}
 ---@return string | "'csv'" | "'unsupport'"
 M.is_support_filetype = function (cur_buffer)
   local ft = vim.api.nvim_buf_get_option(cur_buffer, "filetype")
-  if ft == "csv" then
+  if ft == "csv" or ft == 'tsv' then
     return ft
   else
     return 'unsupport'
