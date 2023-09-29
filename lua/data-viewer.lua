@@ -1,4 +1,3 @@
--- main module file
 local module = require("data-viewer.module")
 local parsers = require('data-viewer.parser.parsers')
 local config = require('data-viewer.config')
@@ -11,7 +10,6 @@ M.setup = function(args)
 end
 
 M.start = function()
-  -- module.start_process()
   local cur_buffer = vim.api.nvim_get_current_buf()
 
   local ft = module.is_support_filetype(cur_buffer)
