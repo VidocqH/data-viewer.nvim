@@ -119,4 +119,21 @@ M.open_win = function (lines)
   vim.api.nvim_win_set_option(win, 'cursorline', false)
 end
 
+---@param headers string[]
+---@param bodyLines table<string, string>[]
+---@param colMaxWidth table<string, number>
+M.highlight_rows = function (headers, bodyLines, colMaxWidth)
+  for i = 1, #bodyLines do
+    local curPos = 1
+    for j, colName in ipairs(headers) do
+      local curCellText = bodyLines[i][colName]
+      local hlStart = curPos
+      local hlEnd = hlStart + string.len(curCellText) + colMaxWidth[colName] - utils.getStringDisplayLength(curCellText)
+
+      vim.api.nvim_buf_add_highlight(0, 0, config.columnColorRoulette[(j % #config.columnColorRoulette) + 1], i + 2, hlStart, hlEnd)
+      curPos = hlEnd + 1
+    end
+  end
+end
+
 return M
