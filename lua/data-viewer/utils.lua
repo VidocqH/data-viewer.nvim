@@ -1,6 +1,6 @@
 local plenaryStrings = require('plenary.strings')
 
----@type table<string, function>
+---@class Utils
 local M = {}
 
 ---@param inputStr string
@@ -31,7 +31,7 @@ end
 
 ---@param str string
 ---@return number
-M.getStringDisplayLength = function(str)
+M.getStringDisplayLength = function (str)
   return plenaryStrings.strdisplaywidth(str)
 end
 
