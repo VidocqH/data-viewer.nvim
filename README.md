@@ -2,7 +2,7 @@
 
 Table views for data files such as 'csv'
 
-<img width="1352" alt="image" src="https://github.com/VidocqH/data-viewer.nvim/assets/16725418/234735a1-5a80-45fd-8e1b-3336b6ae16e7">
+<img width="1352" alt="image" src="https://github.com/VidocqH/data-viewer.nvim/assets/16725418/7b933b3a-fd4e-4758-9917-9055c35796db">
 
 ## Requirements
 - neovim >= 0.8
@@ -31,6 +31,8 @@ requir("lazy").setup({
 ### Default config:
 ```lua
 local config = {
+  columnColorEnable = true,
+  columnColorRoulette = {"DataViewerColumn0", "DataViewerColumn1", "DataViewerColumn2"}, -- Highlight groups
   view = {
     width = 0.8, -- Less than 1 means ratio to screen width
     height = 0.8, -- Less than 1 means ratio to scree height
@@ -41,4 +43,4 @@ local config = {
 
 ## TODO
 - More filetypes support
-- Highlight group
+- Table styles
