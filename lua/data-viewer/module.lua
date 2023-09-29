@@ -120,6 +120,19 @@ M.open_win = function (lines)
 end
 
 ---@param headers string[]
+---@param colMaxWidth table<string, number>
+M.highlight_header = function (headers, colMaxWidth)
+  local curPos = 1
+  for j, colName in ipairs(headers) do
+    local hlStart = curPos
+    local hlEnd = hlStart + string.len(colName) + colMaxWidth[colName] - utils.getStringDisplayLength(colName)
+
+    vim.api.nvim_buf_add_highlight(0, 0, config.columnColorRoulette[(j % #config.columnColorRoulette) + 1], 1, hlStart, hlEnd)
+    curPos = hlEnd + 1
+  end
+end
+
+---@param headers string[]
 ---@param bodyLines table<string, string>[]
 ---@param colMaxWidth table<string, number>
 M.highlight_rows = function (headers, bodyLines, colMaxWidth)
