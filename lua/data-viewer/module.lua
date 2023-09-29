@@ -1,4 +1,6 @@
 local utils = require('data-viewer.utils')
+local configClass = require('data-viewer.config')
+local config = configClass.config
 
 ---@class CustomModule
 local M = {}
@@ -101,12 +103,12 @@ M.open_win = function (lines, viewConfig)
   -- Open the buffer in a new window
   local win = vim.api.nvim_open_win(buf, true, {
     relative = 'win',
-    width = viewConfig.width,
-    height = viewConfig.height,
-    row = math.max(1, math.floor((vim.opt.lines:get() - viewConfig.height) / 2)),
-    col = math.max(1, math.floor((vim.opt.columns:get() - viewConfig.width) / 2)),
+    width = config.view.width,
+    height = config.view.height,
+    row = math.max(1, math.floor((vim.opt.lines:get() - config.view.height) / 2)),
+    col = math.max(1, math.floor((vim.opt.columns:get() - config.view.width) / 2)),
     style = 'minimal',
-    zindex = viewConfig.zindex,
+    zindex = config.view.zindex,
     -- title = 'Data Viewer',
     -- title_pos = 'center'
     -- border = 'single',
