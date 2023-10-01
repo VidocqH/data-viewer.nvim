@@ -2,19 +2,28 @@ local module = require("data-viewer.module")
 local parsers = require('data-viewer.parser.parsers')
 local config = require('data-viewer.config')
 
+---@class StartOptions
+---@field silent? boolean
+local StartOptions = {
+  silent = false
+}
+
 ---@class DataViewer
 local M = {}
 
-M.setup = function(args)
+M.setup = function (args)
   config.setup(args) -- setup config
 end
 
-M.start = function()
+---@param opts? StartOptions
+M.start = function (opts)
   local cur_buffer = vim.api.nvim_get_current_buf()
 
   local ft = module.is_support_filetype(cur_buffer)
   if ft == 'unsupport' then
-    print("Filetype unsupported")
+    if opts and not opts.silent then
+      print("Filetype unsupported")
+    end
     return
   end
 

@@ -11,8 +11,10 @@ local viewConfig = {
 ---@class Config
 ---@field columnColorEnable boolean
 ---@field columnColorRoulette string[]
+---@field autoDisplayWhenOpenFile boolean
 ---@field view ViewConfig
 local config = {
+  autoDisplayWhenOpenFile = false,
   columnColorEnable = true,
   columnColorRoulette = {"DataViewerColumn0", "DataViewerColumn1", "DataViewerColumn2"},
   view = viewConfig,
