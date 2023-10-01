@@ -9,6 +9,8 @@ local viewConfig = {
 }
 
 ---@class Config
+---@field columnColorEnable boolean
+---@field columnColorRoulette string[]
 ---@field view ViewConfig
 local config = {
   columnColorEnable = true,
