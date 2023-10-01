@@ -1,7 +1,7 @@
 ---@class ViewConfig
 ---@field width number
 ---@field height number
----@field zIndex number
+---@field zindex number
 local viewConfig = {
   width = 0.8,
   height = 0.8,
