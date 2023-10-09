@@ -30,27 +30,15 @@ end
 
 ---@param opts? StartOptions
 M.start = function(opts)
-  ---@type string | number
-  local filepath = 0
-  ---@type string
-  local ft = ""
-
   if opts == nil or opts.args == nil then
     vim.print("Invalid Source")
     return
   end
 
-  if opts.args == "" then
-    filepath = vim.api.nvim_get_current_buf()
-    ft = vim.api.nvim_buf_get_option(filepath, "filetype")
-  else
-    local tbl = utils.split_string(opts.args, " ")
-    if #tbl > 2 then
-      vim.print("Usage: DataViewer [filepath] [filetype]")
-      return
-    end
-    filepath = tbl[1]
-    ft = string.lower(tbl[2])
+  local filepath, ft = module.get_file_source_from_args(opts.args)
+  if filepath == nil or ft == nil then
+    vim.print("Usage: DataViewer [filepath] [filetype]")
+    return
   end
 
   ft = module.is_support_filetype(ft)

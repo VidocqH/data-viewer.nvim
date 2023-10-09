@@ -156,4 +156,22 @@ M.highlight_rows = function(headers, bodyLines, colMaxWidth)
   end
 end
 
+---@param args string
+---@return string | number | nil, string | nil
+M.get_file_source_from_args = function(args)
+  if args == "" then
+    local filepath = vim.api.nvim_get_current_buf()
+    local ft = vim.api.nvim_buf_get_option(filepath, "filetype")
+    return filepath, ft
+  else
+    local tbl = utils.split_string(args, " ")
+    if #tbl > 2 then
+      return nil, nil
+    end
+    local filepath = tbl[1]
+    local ft = string.lower(tbl[2])
+    return filepath, ft
+  end
+end
+
 return M
