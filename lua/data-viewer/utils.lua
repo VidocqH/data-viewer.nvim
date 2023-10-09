@@ -6,7 +6,7 @@ local M = {}
 ---@param array1 any[]
 ---@param array2 any[]
 ---@return any[]
-M.merge_array = function (array1, array2)
+M.merge_array = function(array1, array2)
   local ret_array = {}
   for _, val in ipairs(array1) do
     table.insert(ret_array, val)
@@ -19,7 +19,7 @@ end
 
 ---@param str string
 ---@return number
-M.getStringDisplayLength = function (str)
+M.getStringDisplayLength = function(str)
   return plenaryStrings.strdisplaywidth(str)
 end
 
