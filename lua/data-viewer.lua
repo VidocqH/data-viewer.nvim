@@ -50,7 +50,7 @@ M.start = function(opts)
       return
     end
     filepath = tbl[1]
-    ft = tbl[2]
+    ft = string.lower(tbl[2])
   end
 
   ft = module.is_support_filetype(ft)
