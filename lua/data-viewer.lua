@@ -61,8 +61,7 @@ M.start = function(opts)
     return
   end
 
-  local lines = utils.read_file(filepath)
-  local parsedData = parsers[ft](lines)
+  local parsedData = parsers[ft](filepath)
   local colMaxWidth = module.get_max_width(parsedData.headers, parsedData.bodyLines)
   local formatedLines = module.format_lines(parsedData.headers, parsedData.bodyLines, colMaxWidth)
   module.open_win(formatedLines)

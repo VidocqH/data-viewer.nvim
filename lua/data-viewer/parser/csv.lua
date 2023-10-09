@@ -1,3 +1,4 @@
+local utils = require("data-viewer.utils")
 
 ---@param line string
 ---@return string[]
@@ -7,7 +8,7 @@ local function parseLine(line)
   local currentValue = ""
 
   for i = 1, #line do
-    local char = line:sub(i, i)  -- Get the current character
+    local char = line:sub(i, i) -- Get the current character
 
     if char == '"' then
       quoted = not quoted
@@ -47,8 +48,9 @@ local function getBody(csvLines, headers)
   return body
 end
 
----@param lines string[]
-local function parse(lines)
+---@param filepath string
+local function parse(filepath)
+  local lines = utils.read_file(filepath)
   local headers = getHeaders(lines[1])
   table.remove(lines, 1)
   local bodyLines = getBody(lines, headers)
