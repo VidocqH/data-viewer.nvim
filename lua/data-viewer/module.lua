@@ -5,23 +5,15 @@ local config = require("data-viewer.config")
 ---@class CustomModule
 local M = {}
 
----@param cur_buffer number
+---@param filetype string
 ---@return string | "'unsupport'"
-M.is_support_filetype = function(cur_buffer)
-  local ft = vim.api.nvim_buf_get_option(cur_buffer, "filetype")
+M.is_support_filetype = function(filetype)
   for parserName, _ in pairs(parsers) do
-    if parserName == ft then
-      return ft
+    if parserName == filetype then
+      return filetype
     end
   end
   return "unsupport"
-end
-
----@param cur_buffer number
----@return string[]
-M.read_file = function(cur_buffer)
-  local lines = vim.api.nvim_buf_get_lines(cur_buffer, 0, -1, false)
-  return lines
 end
 
 ---@param header string[]

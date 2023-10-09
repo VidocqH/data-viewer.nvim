@@ -23,6 +23,7 @@ Lightweight neovim plugin provides a table view for inspect data files such as `
 ### Commands
 
 - `:DataViewer`
+- `:DataViewer [filepath] [filetype]`
 
 ## Installation
 

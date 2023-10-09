@@ -1,4 +1,4 @@
-local plenaryStrings = require('plenary.strings')
+local plenaryStrings = require("plenary.strings")
 
 ---@class Utils
 local M = {}
@@ -21,6 +21,35 @@ end
 ---@return number
 M.getStringDisplayLength = function(str)
   return plenaryStrings.strdisplaywidth(str)
+end
+
+---@param str string
+---@param sep string
+---@return string[]
+M.split_string = function(str, sep)
+  local ret = {}
+  local pattern = "[^" .. sep .. "]+"
+
+  for segment in string.gmatch(str, pattern) do
+    table.insert(ret, segment)
+  end
+  return ret
+end
+
+---@param file string | number
+---@return string[]
+M.read_file = function(file)
+  if type(file) == "number" then
+    -- buf_number
+    local lines = vim.api.nvim_buf_get_lines(file, 0, -1, false)
+    return lines
+  elseif type(file) == "string" then
+    -- file path
+    local lines = vim.fn.readfile(file)
+    return lines
+  else
+    return {}
+  end
 end
 
 return M
