@@ -13,6 +13,16 @@ local M = {}
 
 M.setup = function (args)
   config.setup(args) -- setup config
+
+  if config.config.autoDisplayWhenOpenFile then
+    vim.api.nvim_create_augroup("DataViewer", { clear = true })
+    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+      group = "DataViewer",
+      callback = function()
+        require("data-viewer").start({ silent = true })
+      end,
+    })
+  end
 end
 
 ---@param opts? StartOptions
