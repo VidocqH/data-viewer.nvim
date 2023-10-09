@@ -1,6 +1,6 @@
 local parsers = require("data-viewer.parser.parsers")
 local utils = require("data-viewer.utils")
-local config = require("data-viewer.config").config
+local config = require("data-viewer.config")
 
 ---@class CustomModule
 local M = {}
@@ -103,12 +103,12 @@ M.open_win = function(lines)
   -- Open the buffer in a new window
   local win = vim.api.nvim_open_win(buf, true, {
     relative = "win",
-    width = config.view.width,
-    height = config.view.height,
-    row = math.max(1, math.floor((vim.opt.lines:get() - config.view.height) / 2)),
-    col = math.max(1, math.floor((vim.opt.columns:get() - config.view.width) / 2)),
+    width = config.config.view.width,
+    height = config.config.view.height,
+    row = math.max(1, math.floor((vim.opt.lines:get() - config.config.view.height) / 2)),
+    col = math.max(1, math.floor((vim.opt.columns:get() - config.config.view.width) / 2)),
     style = "minimal",
-    zindex = config.view.zindex,
+    zindex = config.config.view.zindex,
     -- title = 'Data Viewer',
     -- title_pos = 'center'
     -- border = 'single',
@@ -131,7 +131,7 @@ M.highlight_header = function(headers, colMaxWidth)
     vim.api.nvim_buf_add_highlight(
       0,
       0,
-      config.columnColorRoulette[(j % #config.columnColorRoulette) + 1],
+      config.config.columnColorRoulette[(j % #config.config.columnColorRoulette) + 1],
       1,
       hlStart,
       hlEnd
@@ -154,7 +154,7 @@ M.highlight_rows = function(headers, bodyLines, colMaxWidth)
       vim.api.nvim_buf_add_highlight(
         0,
         0,
-        config.columnColorRoulette[(j % #config.columnColorRoulette) + 1],
+        config.config.columnColorRoulette[(j % #config.config.columnColorRoulette) + 1],
         i + 2,
         hlStart,
         hlEnd
