@@ -14,6 +14,11 @@ local StartOptions = {
 ---@class DataViewer
 local M = {}
 
+M.cur_table = 1
+M.win_id = -1
+M.parsed_data = {}
+M.header_info = {}
+
 M.setup = function(args)
   config.setup(args) -- setup config
 
@@ -50,13 +55,51 @@ M.start = function(opts)
   end
 
   local parsedData = parsers[ft](filepath)
-  local colMaxWidth = module.get_max_width(parsedData.headers, parsedData.bodyLines)
-  local formatedLines = module.format_lines(parsedData.headers, parsedData.bodyLines, colMaxWidth)
-  module.open_win(formatedLines)
-  if config.config.columnColorEnable then
-    module.highlight_header(parsedData.headers, colMaxWidth)
-    module.highlight_rows(parsedData.headers, parsedData.bodyLines, colMaxWidth)
+  local headerStr, headerInfo = module.get_win_header_str(parsedData)
+  for tableName, tableData in pairs(parsedData) do
+    parsedData[tableName]["colMaxWidth"] = module.get_max_width(tableData.headers, tableData.bodyLines)
+    parsedData[tableName]["formatedLines"] = utils.merge_array(
+      { headerStr },
+      module.format_lines(tableData.headers, tableData.bodyLines, tableData["colMaxWidth"])
+    )
   end
+
+  local first_bufnum = -1
+  first_bufnum, parsedData = module.create_bufs(parsedData)
+
+  M.parsed_data = parsedData
+  M.header_info = headerInfo
+  M.win_id = module.open_win(first_bufnum)
+
+  for _, header in ipairs(M.header_info) do
+    local bufnum = parsedData[header.name].bufnum
+    module.highlight_tables_header(bufnum, header)
+  end
+
+  if config.config.columnColorEnable then
+    for _, tableData in pairs(parsedData) do
+      module.highlight_header(tableData.bufnum, tableData.headers, tableData.colMaxWidth)
+      module.highlight_rows(tableData.bufnum, tableData.headers, tableData.bodyLines, tableData.colMaxWidth)
+    end
+  end
+end
+
+M.next_table = function()
+  if not utils.check_win_valid(M.win_id) then
+    return
+  end
+  M.cur_table = M.cur_table == #M.header_info and 1 or M.cur_table + 1
+  local buf = M.parsed_data[M.header_info[M.cur_table].name].bufnum
+  vim.api.nvim_win_set_buf(M.win_id, buf)
+end
+
+M.prev_table = function()
+  if not utils.check_win_valid(M.win_id) then
+    return
+  end
+  M.cur_table = M.cur_table - 1 == 0 and #M.header_info or M.cur_table - 1
+  local buf = M.parsed_data[M.header_info[M.cur_table].name].bufnum
+  vim.api.nvim_win_set_buf(M.win_id, buf)
 end
 
 return M

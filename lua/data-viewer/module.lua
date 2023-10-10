@@ -82,18 +82,43 @@ M.format_lines = function(header, lines, colMaxWidth)
   return utils.merge_array(formatedHeader, formatedBody)
 end
 
----@param lines string[]
-M.open_win = function(lines)
-  local buf = vim.api.nvim_create_buf(false, true)
+---@param tablesData table<string, any>
+---@return string, table<string, string | number>[]
+M.get_win_header_str = function(tablesData)
+  local pos = {}
+  local header = "|"
+  local index = 1
+  for tableName, _ in pairs(tablesData) do
+    table.insert(pos, { name = tableName, startPos = #header + 1 })
+    header = header .. " " .. tableName .. " |"
+    index = index + 1
+  end
+  return header, pos
+end
 
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+local KEYMAP_OPTS = { noremap = true, silent = true }
+---@param tablesData table<string, any>
+---@return number, table<string, any>
+M.create_bufs = function(tablesData)
+  local first_bufnum = -1
+  for tableName, tableData in pairs(tablesData) do
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, tableData.formatedLines)
+    vim.api.nvim_buf_set_option(buf, "modifiable", false)
+    vim.api.nvim_buf_set_keymap(buf, "n", "<C-l>", ":lua require('data-viewer').next_table()<CR>", KEYMAP_OPTS)
+    vim.api.nvim_buf_set_keymap(buf, "n", "<C-h>", ":lua require('data-viewer').prev_table()<CR>", KEYMAP_OPTS)
+    tablesData[tableName]["bufnum"] = buf
+    if first_bufnum == -1 then
+      first_bufnum = buf
+    end
+  end
+  return first_bufnum, tablesData
+end
 
-  -- Set the buffer options
-  vim.api.nvim_buf_set_option(buf, "bufhidden", "delete")
-  vim.api.nvim_buf_set_option(buf, "modifiable", false)
-
-  -- Open the buffer in a new window
-  local win = vim.api.nvim_open_win(buf, true, {
+---@param buf_id number
+---@return number
+M.open_win = function(buf_id)
+  local win = vim.api.nvim_open_win(buf_id, true, {
     relative = "win",
     width = config.config.view.width,
     height = config.config.view.height,
@@ -101,30 +126,32 @@ M.open_win = function(lines)
     col = math.max(1, math.floor((vim.opt.columns:get() - config.config.view.width) / 2)),
     style = "minimal",
     zindex = config.config.view.zindex,
-    -- title = 'Data Viewer',
-    -- title_pos = 'center'
-    -- border = 'single',
+    title = "Data Viewer",
+    title_pos = "center",
+    border = "single",
   })
 
   -- Set the window options
   vim.api.nvim_win_set_option(win, "wrap", false)
   vim.api.nvim_win_set_option(win, "number", false)
   vim.api.nvim_win_set_option(win, "cursorline", false)
+  return win
 end
 
+---@param bufnum number
 ---@param headers string[]
 ---@param colMaxWidth table<string, number>
-M.highlight_header = function(headers, colMaxWidth)
+M.highlight_header = function(bufnum, headers, colMaxWidth)
   local curPos = 1
   for j, colName in ipairs(headers) do
     local hlStart = curPos
     local hlEnd = hlStart + string.len(colName) + colMaxWidth[colName] - utils.getStringDisplayLength(colName)
 
     vim.api.nvim_buf_add_highlight(
-      0,
+      bufnum,
       0,
       config.config.columnColorRoulette[(j % #config.config.columnColorRoulette) + 1],
-      1,
+      2,
       hlStart,
       hlEnd
     )
@@ -132,10 +159,11 @@ M.highlight_header = function(headers, colMaxWidth)
   end
 end
 
+---@param bufnum number
 ---@param headers string[]
 ---@param bodyLines table<string, string>[]
 ---@param colMaxWidth table<string, number>
-M.highlight_rows = function(headers, bodyLines, colMaxWidth)
+M.highlight_rows = function(bufnum, headers, bodyLines, colMaxWidth)
   for i = 1, #bodyLines do
     local curPos = 1
     for j, colName in ipairs(headers) do
@@ -144,16 +172,22 @@ M.highlight_rows = function(headers, bodyLines, colMaxWidth)
       local hlEnd = hlStart + string.len(curCellText) + colMaxWidth[colName] - utils.getStringDisplayLength(curCellText)
 
       vim.api.nvim_buf_add_highlight(
-        0,
+        bufnum,
         0,
         config.config.columnColorRoulette[(j % #config.config.columnColorRoulette) + 1],
-        i + 2,
+        i + 3,
         hlStart,
         hlEnd
       )
       curPos = hlEnd + 1
     end
   end
+end
+
+---@param bufnum number
+---@param info table<string, string | number>
+M.highlight_tables_header = function(bufnum, info)
+  vim.api.nvim_buf_add_highlight(bufnum, 0, "DataViewerFocusTable", 0, info.startPos, info.startPos + #info.name)
 end
 
 ---@param args string

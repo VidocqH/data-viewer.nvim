@@ -12,7 +12,7 @@ local function parseLine(line)
 
     if char == '"' then
       quoted = not quoted
-    elseif char == ',' and not quoted then
+    elseif char == "," and not quoted then
       table.insert(words, currentValue)
       currentValue = ""
     else
@@ -29,7 +29,6 @@ local function getHeaders(headerStr)
   ---@type string[]
   return parseLine(headerStr)
 end
-
 
 ---@param csvLines string[]
 ---@param headers string[]
@@ -54,7 +53,7 @@ local function parse(filepath)
   local headers = getHeaders(lines[1])
   table.remove(lines, 1)
   local bodyLines = getBody(lines, headers)
-  return { headers = headers, bodyLines = bodyLines }
+  return { csv = { headers = headers, bodyLines = bodyLines } }
 end
 
 return parse

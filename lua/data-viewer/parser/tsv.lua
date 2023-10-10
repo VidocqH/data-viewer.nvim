@@ -54,7 +54,7 @@ local function parse(filepath)
   local headers = getHeaders(lines[1])
   table.remove(lines, 1)
   local bodyLines = getBody(lines, headers)
-  return { headers = headers, bodyLines = bodyLines }
+  return { tsv = { headers = headers, bodyLines = bodyLines } }
 end
 
 return parse
