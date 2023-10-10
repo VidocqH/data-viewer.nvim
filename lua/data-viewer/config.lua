@@ -18,11 +18,13 @@ local KeymapConfig = {
 
 ---@class Config
 ---@field columnColorEnable boolean
+---@field maxLineEachTable number
 ---@field columnColorRoulette string[]
 ---@field autoDisplayWhenOpenFile boolean
 ---@field view ViewConfig
 local DefaultConfig = {
   autoDisplayWhenOpenFile = false,
+  maxLineEachTable = 100,
   columnColorEnable = true,
   columnColorRoulette = { "DataViewerColumn0", "DataViewerColumn1", "DataViewerColumn2" },
   view = ViewConfig,

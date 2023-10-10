@@ -1,4 +1,5 @@
 local status, sqlite = pcall(require, "sqlite")
+local config = require("data-viewer.config")
 
 local get_all_table_names = function(db)
   local query = db:eval("SELECT name FROM sqlite_schema WHERE type='table' ORDER BY rootpage ASC")
@@ -21,7 +22,8 @@ local get_table_column_names = function(db, table_name)
 end
 
 local get_table_data = function(db, table_name)
-  local query = db:select(table_name)
+  local opts = config.config.maxLineEachTable >= 0 and { limit = config.config.maxLineEachTable } or {}
+  local query = db:select(table_name, opts)
   return query
 end
 
