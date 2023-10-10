@@ -55,6 +55,11 @@ M.start = function(opts)
   end
 
   local parsedData = parsers[ft](filepath)
+  if type(parsedData) == "string" then
+    vim.print(parsedData)
+    return
+  end
+
   local headerStr, headerInfo = module.get_win_header_str(parsedData)
   for tableName, tableData in pairs(parsedData) do
     parsedData[tableName]["colMaxWidth"] = module.get_max_width(tableData.headers, tableData.bodyLines)
