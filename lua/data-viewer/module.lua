@@ -2,6 +2,8 @@ local parsers = require("data-viewer.parser.parsers")
 local utils = require("data-viewer.utils")
 local config = require("data-viewer.config")
 
+local KEYMAP_OPTS = { noremap = true, silent = true }
+
 ---@class CustomModule
 local M = {}
 
@@ -96,7 +98,6 @@ M.get_win_header_str = function(tablesData)
   return header, pos
 end
 
-local KEYMAP_OPTS = { noremap = true, silent = true }
 ---@param tablesData table<string, any>
 ---@return number, table<string, any>
 M.create_bufs = function(tablesData)
@@ -105,8 +106,8 @@ M.create_bufs = function(tablesData)
     local buf = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, tableData.formatedLines)
     vim.api.nvim_buf_set_option(buf, "modifiable", false)
-    vim.api.nvim_buf_set_keymap(buf, "n", "<C-l>", ":lua require('data-viewer').next_table()<CR>", KEYMAP_OPTS)
-    vim.api.nvim_buf_set_keymap(buf, "n", "<C-h>", ":lua require('data-viewer').prev_table()<CR>", KEYMAP_OPTS)
+    vim.api.nvim_buf_set_keymap(buf, "n", config.config.keymap.next_table, ":DataViewerNextTable<CR>", KEYMAP_OPTS)
+    vim.api.nvim_buf_set_keymap(buf, "n", config.config.keymap.prev_table, ":DataViewerPrevTable<CR>", KEYMAP_OPTS)
     tablesData[tableName]["bufnum"] = buf
     if first_bufnum == -1 then
       first_bufnum = buf

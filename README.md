@@ -64,7 +64,11 @@ local config = {
     width = 0.8, -- Less than 1 means ratio to screen width
     height = 0.8, -- Less than 1 means ratio to screen height
     zindex = 50,
-  }
+  },
+  keymap = {
+    next_table = "<C-l>",
+    prev_table = "<C-h>",
+  },
 }
 ```
 

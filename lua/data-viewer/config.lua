@@ -2,10 +2,18 @@
 ---@field width number
 ---@field height number
 ---@field zindex number
-local viewConfig = {
+local ViewConfig = {
   width = 0.8,
   height = 0.8,
   zindex = 50,
+}
+
+---@class KeymapConfig
+---@field next_table string
+---@field prev_table string
+local KeymapConfig = {
+  next_table = "<C-l>",
+  prev_table = "<C-h>",
 }
 
 ---@class Config
@@ -17,7 +25,8 @@ local DefaultConfig = {
   autoDisplayWhenOpenFile = false,
   columnColorEnable = true,
   columnColorRoulette = { "DataViewerColumn0", "DataViewerColumn1", "DataViewerColumn2" },
-  view = viewConfig,
+  view = ViewConfig,
+  keymap = KeymapConfig,
 }
 
 ---@class ConfidModule
