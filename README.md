@@ -67,6 +67,7 @@ local config = {
     zindex = 50,
   },
   keymap = {
+    quit = "q",
     next_table = "<C-l>",
     prev_table = "<C-h>",
   },

@@ -9,9 +9,11 @@ local ViewConfig = {
 }
 
 ---@class KeymapConfig
+---@field quit string
 ---@field next_table string
 ---@field prev_table string
 local KeymapConfig = {
+  quit = "q",
   next_table = "<C-l>",
   prev_table = "<C-h>",
 }
