@@ -74,6 +74,16 @@ local config = {
 }
 ```
 
+### Highlight Groups
+
+You can use your own highlights for columns by change config
+
+- DataViewerColumn0
+- DataViewerColumn1
+- DataViewerColumn2
+
+- DataViewerFocusTable
+
 ## TODO
 
 - More filetypes support
