@@ -93,18 +93,20 @@ M.next_table = function()
   if not utils.check_win_valid(M.win_id) then
     return
   end
+  local old_buf = M.parsed_data[M.header_info[M.cur_table].name].bufnum
   M.cur_table = M.cur_table == #M.header_info and 1 or M.cur_table + 1
   local buf = M.parsed_data[M.header_info[M.cur_table].name].bufnum
-  vim.api.nvim_win_set_buf(M.win_id, buf)
+  module.switch_buffer(M.win_id, old_buf, buf)
 end
 
 M.prev_table = function()
   if not utils.check_win_valid(M.win_id) then
     return
   end
+  local old_buf = M.parsed_data[M.header_info[M.cur_table].name].bufnum
   M.cur_table = M.cur_table - 1 == 0 and #M.header_info or M.cur_table - 1
   local buf = M.parsed_data[M.header_info[M.cur_table].name].bufnum
-  vim.api.nvim_win_set_buf(M.win_id, buf)
+  module.switch_buffer(M.win_id, old_buf, buf)
 end
 
 M.close_tables = function()

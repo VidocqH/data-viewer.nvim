@@ -120,6 +120,13 @@ end
 ---@param buf_id number
 ---@return number
 M.open_win = function(buf_id)
+  if not config.config.view.float then
+    local win = vim.api.nvim_get_current_win()
+    vim.api.nvim_buf_set_option(buf_id, "buflisted", true)
+    vim.api.nvim_set_current_buf(buf_id)
+    return win
+  end
+
   local win = vim.api.nvim_open_win(buf_id, true, {
     relative = "win",
     width = config.config.view.width,
@@ -208,6 +215,17 @@ M.get_file_source_from_args = function(args)
     local ft = string.lower(tbl[2])
     return filepath, ft
   end
+end
+
+---@param win_id number
+---@param old_buf number
+---@param new_buf number
+M.switch_buffer = function(win_id, old_buf, new_buf)
+  if not config.config.view.float then
+    vim.api.nvim_buf_set_option(old_buf, "buflisted", false)
+    vim.api.nvim_buf_set_option(new_buf, "buflisted", true)
+  end
+  vim.api.nvim_win_set_buf(win_id, new_buf)
 end
 
 return M

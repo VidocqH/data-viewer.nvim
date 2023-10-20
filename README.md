@@ -64,9 +64,10 @@ local config = {
     "DataViewerColumn2",
   },
   view = {
-    width = 0.8, -- Less than 1 means ratio to screen width
-    height = 0.8, -- Less than 1 means ratio to screen height
-    zindex = 50,
+    float = true, -- False will open in current window
+    width = 0.8, -- Less than 1 means ratio to screen width, valid when float = true
+    height = 0.8, -- Less than 1 means ratio to screen height, valid when float = true
+    zindex = 50, -- Valid when float = true
   },
   keymap = {
     quit = "q",

@@ -3,6 +3,7 @@
 ---@field height number
 ---@field zindex number
 local ViewConfig = {
+  float = true, -- use float window or not
   width = 0.8,
   height = 0.8,
   zindex = 50,
