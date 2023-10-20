@@ -18,8 +18,8 @@ Table of Contents                         *data-viewer-docs-table-of-contents*
 Lightweight neovim plugin provides a table view for inspect data files such as
 `csv`, `tsv`
 
-
-
+Floating View
+Tab View
 
 SUPPORTED FILETYPES ~
 
