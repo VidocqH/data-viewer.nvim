@@ -201,7 +201,7 @@ M.get_file_source_from_args = function(args)
     return filepath, ft
   else
     local tbl = utils.split_string(args, " ")
-    if #tbl > 2 then
+    if #tbl ~= 2 then
       return nil, nil
     end
     local filepath = tbl[1]
