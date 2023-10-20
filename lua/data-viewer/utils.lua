@@ -72,6 +72,8 @@ M.read_file = function(file)
   end
 end
 
+---@param win_id number
+---@return boolean
 M.check_win_valid = function(win_id)
   if vim.api.nvim_win_is_valid(win_id) and vim.api.nvim_get_current_win() == win_id then
     return true
