@@ -6,7 +6,15 @@
 
 Lightweight neovim plugin provides a table view for inspect data files such as `csv`, `tsv`
 
-<img width="1352" alt="image" src="https://github.com/VidocqH/data-viewer.nvim/assets/16725418/7b933b3a-fd4e-4758-9917-9055c35796db">
+<p align='center'>
+  <b>Floating View</b>
+  <img width="1357" alt="image" src="https://github.com/VidocqH/data-viewer.nvim/assets/16725418/e4e494e5-ff8b-4a5c-9f4d-07fc1982bace">
+</p>
+
+<p align='center'>
+  <b>Tab View</b>
+  <img width="1164" alt="image" src="https://github.com/VidocqH/data-viewer.nvim/assets/16725418/468ecb0a-2dd3-4dc9-ad61-6c55516fbdec">
+</p>
 
 ### Supported filetypes
 
