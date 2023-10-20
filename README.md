@@ -30,6 +30,8 @@ Lightweight neovim plugin provides a table view for inspect data files such as `
 - `:DataViewerNextTable`
 - `:DataViewerPrevTable`
 
+- `:DataViewerClose`
+
 ## Installation
 
 ### Lazy:

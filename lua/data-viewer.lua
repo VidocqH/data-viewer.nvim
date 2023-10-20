@@ -107,4 +107,17 @@ M.prev_table = function()
   vim.api.nvim_win_set_buf(M.win_id, buf)
 end
 
+M.close_tables = function()
+  for _, tableData in pairs(M.parsed_data) do
+    local buf = tableData.bufnum
+    vim.api.nvim_buf_delete(buf, { force = true })
+  end
+  M.parsed_data = {}
+
+  -- Close popup window
+  if config.config.view.float and utils.check_win_valid(M.win_id) then
+    vim.api.nvim_win_close(M.win_id, true)
+  end
+end
+
 return M

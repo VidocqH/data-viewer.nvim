@@ -108,7 +108,7 @@ M.create_bufs = function(tablesData)
     vim.api.nvim_buf_set_option(buf, "modifiable", false)
     vim.api.nvim_buf_set_keymap(buf, "n", config.config.keymap.next_table, ":DataViewerNextTable<CR>", KEYMAP_OPTS)
     vim.api.nvim_buf_set_keymap(buf, "n", config.config.keymap.prev_table, ":DataViewerPrevTable<CR>", KEYMAP_OPTS)
-    vim.api.nvim_buf_set_keymap(buf, "n", config.config.keymap.quit, ":q<CR>", KEYMAP_OPTS)
+    vim.api.nvim_buf_set_keymap(buf, "n", config.config.keymap.quit, ":DataViewerClose<CR>", KEYMAP_OPTS)
     tablesData[tableName]["bufnum"] = buf
     if first_bufnum == -1 then
       first_bufnum = buf
