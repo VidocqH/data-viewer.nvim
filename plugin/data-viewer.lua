@@ -7,4 +7,4 @@ vim.api.nvim_set_hl(0, "DataViewerColumn0", { fg = "#bb0000" })
 vim.api.nvim_set_hl(0, "DataViewerColumn1", { fg = "#00bb00" })
 vim.api.nvim_set_hl(0, "DataViewerColumn2", { fg = "#0000bb" })
 
-vim.api.nvim_set_hl(0, "DataViewerFocusTable", { link = "CursorLine" })
+vim.api.nvim_set_hl(0, "DataViewerFocusTable", { fg = "#bbbb00" })
