@@ -27,10 +27,14 @@ local get_table_data = function(db, table_name)
   return query
 end
 
----@param filepath string
+---@param filepath string|integer
 local parse = function(filepath)
   if not status then
     return "SQL dependency not installed"
+  end
+
+  if type(filepath) == 'number' then
+    filepath = vim.api.nvim_buf_get_name(filepath)
   end
 
   local tables_data = sqlite.with_open(filepath, function(db)
