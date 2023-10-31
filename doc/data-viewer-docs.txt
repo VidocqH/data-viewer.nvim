@@ -1,4 +1,4 @@
-*data-viewer-docs.txt*     For Neovim >= 0.8.0    Last change: 2023 October 20
+*data-viewer-docs.txt*     For Neovim >= 0.8.0    Last change: 2023 October 31
 
 ==============================================================================
 Table of Contents                         *data-viewer-docs-table-of-contents*
