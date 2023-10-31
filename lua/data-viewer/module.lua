@@ -118,22 +118,30 @@ M.create_bufs = function(tablesData)
   return first_bufnum, tablesData
 end
 
----@param buf_id number
+---@tparam buf_id number
+---@tparam force_replace boolean
 ---@return number
-M.open_win = function(buf_id)
-  if not config.config.view.float then
+M.open_win = function(opts)
+  local buf_id = opts[1]
+  local force_replace = opts[2]
+
+  if not config.config.view.float or force_replace then
     local win = vim.api.nvim_get_current_win()
     vim.api.nvim_buf_set_option(buf_id, "buflisted", true)
     vim.api.nvim_set_current_buf(buf_id)
     return win
   end
 
+  local screenHeight = vim.opt.lines:get()
+  local screenWidth = vim.opt.columns:get()
+  local height = math.max(1, math.floor(screenHeight * config.config.view.height))
+  local width = math.max(1, math.floor(screenWidth * config.config.view.width))
   local win = vim.api.nvim_open_win(buf_id, true, {
     relative = "win",
-    width = config.config.view.width,
-    height = config.config.view.height,
-    row = math.max(1, math.floor((vim.opt.lines:get() - config.config.view.height) / 2)),
-    col = math.max(1, math.floor((vim.opt.columns:get() - config.config.view.width) / 2)),
+    width = width,
+    height = height,
+    row = math.max(1, math.floor((screenHeight - height) / 2)),
+    col = math.max(1, math.floor((screenWidth - width) / 2)),
     style = "minimal",
     zindex = config.config.view.zindex,
     title = "Data Viewer",

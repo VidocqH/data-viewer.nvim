@@ -6,6 +6,7 @@ local utils = require("data-viewer.utils")
 ---@class StartOptions
 ---@field silent? boolean
 ---@field args string
+---@field force_replace? boolean
 local StartOptions = {
   silent = false,
   args = "",
@@ -21,16 +22,6 @@ M.header_info = {}
 
 M.setup = function(args)
   config.setup(args) -- setup config
-
-  if config.config.autoDisplayWhenOpenFile then
-    vim.api.nvim_create_augroup("DataViewer", { clear = true })
-    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-      group = "DataViewer",
-      callback = function()
-        require("data-viewer").start({ silent = true, args = "" })
-      end,
-    })
-  end
 end
 
 ---@param opts? StartOptions
@@ -74,7 +65,7 @@ M.start = function(opts)
 
   M.parsed_data = parsedData
   M.header_info = headerInfo
-  M.win_id = module.open_win(first_bufnum)
+  M.win_id = module.open_win { first_bufnum, opts.force_replace }
 
   for _, header in ipairs(M.header_info) do
     local bufnum = parsedData[header.name].bufnum
