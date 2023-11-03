@@ -1,4 +1,4 @@
-*data-viewer-docs.txt*     For Neovim >= 0.8.0    Last change: 2023 October 31
+*data-viewer-docs.txt*    For Neovim >= 0.8.0    Last change: 2023 November 03
 
 ==============================================================================
 Table of Contents                         *data-viewer-docs-table-of-contents*
@@ -40,8 +40,9 @@ USAGE                                 *data-viewer-docs-dataviewer.nvim-usage*
 
 COMMANDS ~
 
-- `:DataViewer`
-- `:DataViewer [filepath] [filetype]`
+- `:DataViewer` – open with current file and auto detect filetype
+- `:DataViewer [filetype]` – open with current file with given filetype
+- `:DataViewer [filepath] [filetype]` – open with given file and given filetype
 - `:DataViewerNextTable`
 - `:DataViewerPrevTable`
 - `:DataViewerClose`
