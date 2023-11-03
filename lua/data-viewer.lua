@@ -33,7 +33,7 @@ M.start = function(opts)
 
   local filepath, ft = module.get_file_source_from_args(opts.args)
   if filepath == nil or ft == nil then
-    vim.print("Usage: DataViewer [filepath] [filetype]")
+    vim.print("Usage: DataViewer [filetype] or DataViewer [filepath] [filetype]")
     return
   end
 

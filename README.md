@@ -32,8 +32,9 @@ Lightweight neovim plugin provides a table view for inspect data files such as `
 
 ### Commands
 
-- `:DataViewer`
-- `:DataViewer [filepath] [filetype]`
+- `:DataViewer` -- open with current file and auto detect filetype
+- `:DataViewer [filetype]` -- open with current file with given filetype
+- `:DataViewer [filepath] [filetype]` -- open with given file and given filetype
 
 - `:DataViewerNextTable`
 - `:DataViewerPrevTable`
