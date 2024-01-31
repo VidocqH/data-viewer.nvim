@@ -46,7 +46,7 @@ Lightweight neovim plugin provides a table view for inspect data files such as `
 ### Lazy:
 
 ```lua
-requir("lazy").setup({
+require("lazy").setup({
   {
     'vidocqh/data-viewer.nvim',
     opts = {},
