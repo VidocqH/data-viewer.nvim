@@ -6,6 +6,7 @@
 local M = {
   csv = require('data-viewer.parser.csv'),
   tsv = require('data-viewer.parser.tsv'),
+  ssv = require('data-viewer.parser.ssv'),
   sqlite = require('data-viewer.parser.sqlite'),
 }
 
