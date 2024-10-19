@@ -77,6 +77,7 @@ local config = {
     width = 0.8, -- Less than 1 means ratio to screen width, valid when float = true
     height = 0.8, -- Less than 1 means ratio to screen height, valid when float = true
     zindex = 50, -- Valid when float = true
+    relative = true, -- If to open the window relative to the current buffer, valid when float = true
   },
   keymap = {
     quit = "q",

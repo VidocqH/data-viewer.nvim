@@ -7,6 +7,7 @@ local ViewConfig = {
   width = 0.8,
   height = 0.8,
   zindex = 50,
+  relative = true,
 }
 
 ---@class KeymapConfig
