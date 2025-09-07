@@ -13,5 +13,6 @@ vim.filetype.add({
   extension = {
     sqlite3 = "sqlite",
     sqlite = "sqlite",
+    db = "sqlite"
   },
 })

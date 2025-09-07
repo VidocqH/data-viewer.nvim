@@ -27,7 +27,7 @@ local KeymapConfig = {
 ---@field skipSqlite boolean
 ---@field view ViewConfig
 local DefaultConfig = {
-  autoDisplayWhenOpenFile = false,
+  autoDisplayWhenOpenFile = true,
   skipSqlite = false,
   maxLineEachTable = 100,
   columnColorEnable = true,

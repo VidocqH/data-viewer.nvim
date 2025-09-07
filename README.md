@@ -21,6 +21,7 @@ Lightweight neovim plugin provides a table view for inspect data files such as `
 - csv
 - tsv
 - sqlite
+- db
 
 ## Requirements
 
@@ -64,7 +65,7 @@ requir("lazy").setup({
 
 ```lua
 local config = {
-  autoDisplayWhenOpenFile = false,
+  autoDisplayWhenOpenFile = true,
   maxLineEachTable = 100,
   columnColorEnable = true,
   columnColorRoulette = { -- Highlight groups
